@@ -84,10 +84,9 @@ packages:
   esptouch_smartconfig:
     dependency: "direct main"
     description:
-      name: esptouch_smartconfig
-      sha256: b9791c90c588992d7b1875d29e99034b9a43283ec4f320c1f609edc5e48c64fe
-      url: "https://pub.dev"
-    source: hosted
+      path: "packages/esptouch_smartconfig"
+      relative: true
+    source: path
     version: "1.1.0"
   event_bus:
     dependency: transitive
