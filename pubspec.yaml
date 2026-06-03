@@ -42,6 +42,10 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_animate: ^4.5.0
 
+dependency_overrides:
+  esptouch_smartconfig:
+    path: packages/esptouch_smartconfig
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
