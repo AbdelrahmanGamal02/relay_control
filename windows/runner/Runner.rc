@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "smart_20relay_control" "\0"
+            VALUE "FileDescription", "Unimog V-7993" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "smart_20relay_control" "\0"
+            VALUE "InternalName", "Unimog V-7993" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "smart_20relay_control.exe" "\0"
-            VALUE "ProductName", "smart_20relay_control" "\0"
+            VALUE "OriginalFilename", "unimog_v_7993.exe" "\0"
+            VALUE "ProductName", "Unimog V-7993" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

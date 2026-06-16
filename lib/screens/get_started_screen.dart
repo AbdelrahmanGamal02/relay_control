@@ -56,7 +56,7 @@ class GetStartedScreen extends StatelessWidget {
                         FadeInUp(
                           delay: const Duration(milliseconds: 200),
                           child: const Text(
-                            'Smart Home Control',
+                            'Unimog V-7993',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 32,

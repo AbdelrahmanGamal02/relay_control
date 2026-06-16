@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => BoardProvider())],
       child: MaterialApp(
-        title: 'Smart Home Control',
+        title: 'Unimog V-7993',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.darkTheme,
         home: const GetStartedScreen(),

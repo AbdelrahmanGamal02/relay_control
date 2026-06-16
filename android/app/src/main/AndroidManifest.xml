@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="smart home"
+        android:label="Unimog V-7993"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
