@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/board_provider.dart';
 import 'screens/get_started_screen.dart';
+import 'screens/privacy_acceptance_screen.dart';
+import 'services/storage_service.dart';
 import 'theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-    runApp(const MyApp());
+  
+  final storageService = StorageService();
+  final isPrivacyAccepted = await storageService.isPrivacyAccepted();
+  
+  runApp(MyApp(isPrivacyAccepted: isPrivacyAccepted));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isPrivacyAccepted;
+
+  const MyApp({super.key, required this.isPrivacyAccepted});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +28,9 @@ class MyApp extends StatelessWidget {
         title: 'Unimog V-7993',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.darkTheme,
-        home: const GetStartedScreen(),
+        home: isPrivacyAccepted
+            ? const GetStartedScreen()
+            : const PrivacyAcceptanceScreen(),
       ),
     );
   }
