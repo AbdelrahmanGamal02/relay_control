@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'home_screen.dart';
 
 class GetStartedScreen extends StatelessWidget {
@@ -81,19 +82,53 @@ class GetStartedScreen extends StatelessWidget {
                         const Spacer(),
                         FadeInUp(
                           delay: const Duration(milliseconds: 600),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomeScreen(),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomeScreen(),
+                                    ),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: const Size(double.infinity, 60),
                                 ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: const Size(double.infinity, 60),
-                            ),
-                            child: const Text('Get Started'),
+                                child: const Text('Get Started'),
+                              ),
+                              const SizedBox(height: 16),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () => _launchURL('https://abdelrahmangamal02.github.io/iot-app-policy/terms.html'),
+                                    child: Text(
+                                      'Terms of Service',
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: 12,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                  const Text('  •  ', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                                  GestureDetector(
+                                    onTap: () => _launchURL('https://abdelrahmangamal02.github.io/iot-app-policy/privacy-policy.html'),
+                                    child: Text(
+                                      'Privacy Policy',
+                                      style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: 12,
+                                        decoration: TextDecoration.underline,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -106,5 +141,12 @@ class GetStartedScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _launchURL(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      // Ignore errors silently or log them
+    }
   }
 }

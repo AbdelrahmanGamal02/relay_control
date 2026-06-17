@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../providers/board_provider.dart';
 import '../widgets/board_card.dart';
 import 'smart_config_screen.dart';
@@ -15,6 +16,11 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('My Boards'),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => _showAppInfoDialog(context),
+            tooltip: 'App Info & Legal',
+          ),
           Consumer<BoardProvider>(
             builder: (context, provider, child) {
               return Container(
@@ -252,6 +258,71 @@ class HomeScreen extends StatelessWidget {
       MaterialPageRoute(builder: (context) => const _QRScannerScreen()),
     );
     return result;
+  }
+
+  void _showAppInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('About Unimog V-7993'),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Unimog V-7993 is a mobile application designed to remotely configure and control hardware boards and relay modules.',
+              style: TextStyle(height: 1.4),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              'Version: 1.0.0',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Support: bebo2002elkhateeb@gmail.com',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 24),
+            const Divider(),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    _launchURL('https://abdelrahmangamal02.github.io/iot-app-policy/terms.html');
+                  },
+                  child: const Text('Terms of Service'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    _launchURL('https://abdelrahmangamal02.github.io/iot-app-policy/privacy-policy.html');
+                  },
+                  child: const Text('Privacy Policy'),
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _launchURL(String urlString) async {
+    final Uri url = Uri.parse(urlString);
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
+      // Ignore errors silently or log them
+    }
   }
 }
 
