@@ -8,10 +8,10 @@ import 'theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   final storageService = StorageService();
   final isPrivacyAccepted = await storageService.isPrivacyAccepted();
-  
+
   runApp(MyApp(isPrivacyAccepted: isPrivacyAccepted));
 }
 

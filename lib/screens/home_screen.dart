@@ -165,7 +165,9 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('Enter the name and serial number of your Board board to connect.'),
+                  Text(
+                    'Enter the name and serial number of your Board board to connect.',
+                  ),
                   const SizedBox(height: 20),
                   TextField(
                     controller: nameController,
@@ -237,8 +239,10 @@ class HomeScreen extends StatelessWidget {
                     nav.pop();
                   } else {
                     messenger.showSnackBar(
-                       SnackBar(
-                        content: Text('Board already exists or invalid Serial.'),
+                      SnackBar(
+                        content: Text(
+                          'Board already exists or invalid Serial.',
+                        ),
                       ),
                     );
                   }
@@ -265,9 +269,7 @@ class HomeScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('About Unimog V-7993'),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -283,7 +285,7 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             const Text(
-              'Support: bebo2002elkhateeb@gmail.com',
+              'Support: electro.control34@gmail.com',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
@@ -294,13 +296,17 @@ class HomeScreen extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {
-                    _launchURL('https://abdelrahmangamal02.github.io/iot-app-policy/terms.html');
+                    _launchURL(
+                      'https://abdelrahmangamal02.github.io/iot-app-policy/terms.html',
+                    );
                   },
                   child: const Text('Terms of Service'),
                 ),
                 TextButton(
                   onPressed: () {
-                    _launchURL('https://abdelrahmangamal02.github.io/iot-app-policy/privacy-policy.html');
+                    _launchURL(
+                      'https://abdelrahmangamal02.github.io/iot-app-policy/privacy-policy.html',
+                    );
                   },
                   child: const Text('Privacy Policy'),
                 ),
