@@ -51,5 +51,7 @@
 		<string>http</string>
 		<string>mailto</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>This app requires camera access to take photos and update your profile picture.</string>
 </dict>
 </plist>
