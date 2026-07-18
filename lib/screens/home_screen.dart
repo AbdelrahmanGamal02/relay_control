@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../providers/board_provider.dart';
 import '../widgets/board_card.dart';
@@ -189,17 +188,7 @@ class HomeScreen extends StatelessWidget {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      prefixIcon: const Icon(Icons.qr_code_scanner),
-                      suffixIcon: IconButton(
-                        icon: const Icon(Icons.camera_alt),
-                        onPressed: () async {
-                          final serial = await _scanQRCode(context);
-                          if (serial != null && serial.isNotEmpty) {
-                            serialController.text = serial;
-                            setState(() {});
-                          }
-                        },
-                      ),
+                      prefixIcon: const Icon(Icons.numbers),
                     ),
                   ),
                 ],
@@ -256,13 +245,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Future<String?> _scanQRCode(BuildContext context) async {
-    final result = await Navigator.push<String?>(
-      context,
-      MaterialPageRoute(builder: (context) => const _QRScannerScreen()),
-    );
-    return result;
-  }
+
 
   void _showAppInfoDialog(BuildContext context) {
     showDialog(
@@ -332,98 +315,3 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class _QRScannerScreen extends StatefulWidget {
-  const _QRScannerScreen();
-
-  @override
-  State<_QRScannerScreen> createState() => _QRScannerScreenState();
-}
-
-class _QRScannerScreenState extends State<_QRScannerScreen> {
-  late MobileScannerController controller;
-  bool _isDetecting = false;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = MobileScannerController(formats: const [BarcodeFormat.qrCode]);
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Scan QR Code'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
-      body: Stack(
-        children: [
-          MobileScanner(
-            controller: controller,
-            onDetect: (capture) {
-              if (_isDetecting) return; // Prevent multiple detections
-
-              final List<Barcode> barcodes = capture.barcodes;
-              for (final barcode in barcodes) {
-                if (barcode.rawValue != null && barcode.rawValue!.isNotEmpty) {
-                  _isDetecting = true;
-
-                  // Show visual feedback
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('QR Code detected: ${barcode.rawValue!}'),
-                      duration: const Duration(milliseconds: 500),
-                    ),
-                  );
-
-                  final navigator = Navigator.of(context);
-                  // Return the scanned value
-                  Future.delayed(const Duration(milliseconds: 500), () {
-                    if (mounted) {
-                      navigator.pop(barcode.rawValue);
-                    }
-                  });
-                  return;
-                }
-              }
-            },
-          ),
-          // Scanning overlay with guide
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 250,
-                  height: 250,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.green, width: 3),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                const SizedBox(height: 24),
-                Text(
-                  'Align QR code within the frame',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

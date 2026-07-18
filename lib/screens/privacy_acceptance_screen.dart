@@ -135,14 +135,7 @@ class _PrivacyAcceptanceScreenState extends State<PrivacyAcceptanceScreen> {
                                       'Device control signals are sent directly to your designated MQTT broker. We do not monitor your traffic.',
                                 ),
                                 const SizedBox(height: 16),
-                                _buildHighlightRow(
-                                  context,
-                                  icon: Icons.qr_code_scanner_rounded,
-                                  title: 'On-Device Camera',
-                                  description:
-                                      'Camera permission is solely used to scan QR codes for easy onboarding. No images are uploaded.',
-                                ),
-                                const SizedBox(height: 16),
+
                                 _buildHighlightRow(
                                   context,
                                   icon: Icons.warning_amber_rounded,
